@@ -1,0 +1,82 @@
+package com.Jay.Clg.java;
+
+import java.util.Scanner;
+
+public class ATM {
+  int UserID = 12345678;
+  int Password = 1853;
+  Double Balance = 10000.00;
+  Scanner scn = new Scanner(System.in);
+  String Log= " statement\n" ;
+  int stm = 0;
+
+  public static void main(String[] args) {
+    ATM call = new ATM();
+    call.intro();
+  }
+
+  private void intro() {
+    System.out.println("Hello Welcome TO ATM");
+
+    System.out.println("Please Enter Your UserID & Password");
+    int CheckUserID = scn.nextInt();
+    int CheckPassword = scn.nextInt();
+
+    if (CheckUserID == UserID && CheckPassword == Password) {
+      while (true) {
+        System.out.println("Press 1, For Withdraw Money");
+        System.out.println("Press 2, For Diposite Money");
+        System.out.println("Press 3, For Check Balance");
+        System.out.println("Press 4, For Statement");
+        System.out.println("Press 5, For Exit");
+        int choice = scn.nextInt();
+
+        switch (choice) {
+          case 1:
+            System.out.println("You Selected Withdraw Money");
+            System.out.println("Please Enter Amount You Want To Dithdraw");
+            int WithAmount = scn.nextInt();
+            if (WithAmount > Balance) {
+              System.out.println("Sorry You Have Unsufficient Balance \n Please Try Lower Amount");
+            }
+
+            Balance -= WithAmount;
+            System.out.println("You Have Withdrawed " + WithAmount + " Rs Yor Remaining Balance Is " + Balance + " Rs");
+            stm++;
+            Log = Log.concat(stm + " Withdrawed " + WithAmount +"\n");
+          
+            break;
+          case 2:
+            System.out.println("You Selected Deposite Money");
+            System.out.println("Please Enter Amount You Want To Deposite");
+            int DepAmount = scn.nextInt();
+            
+            Balance += DepAmount;
+            System.out.println("You Have Deposited " + DepAmount + " Rs Yor New Balance Is " + Balance + " Rs");
+            stm++;
+            Log = Log.concat(stm +" Deposited Amount " + DepAmount+"\n");
+            
+            break;
+          case 3:
+            System.out.println("You Have Selected Check Balance");
+            System.out.println("Your Current Balance is " + Balance);
+            break;
+          case 4:
+            System.out.println(Log);
+            break;
+          case 5:
+            System.out.println("Thank You");
+            System.exit(0);
+            break;
+          default:
+            System.out.println("Something Went Wrong Please Please Try Again Later");
+            break;
+        }
+      }
+    } else {
+      System.out.println("Your UserID Or Your Password Is Wrong");
+    }
+
+  }
+
+}
